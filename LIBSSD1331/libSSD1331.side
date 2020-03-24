@@ -1,0 +1,13 @@
+libSSD1331.c
+SSD1331.h
+SSD1331.c
+SSD1331reg.h
+>compiler=C
+>memtype=lmm main ram
+>optimize=-Os
+>-m32bit-doubles
+>-fno-exceptions
+>defs::-std=c99
+>-lm
+>-create_library
+>BOARD::ACTIVITYBOARD

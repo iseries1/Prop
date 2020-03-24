@@ -1,0 +1,13 @@
+liblsm9ds1.c
+lsm9ds1.c
+lsm9ds1.h
+lsm9ds1reg.h
+>compiler=C
+>memtype=lmm main ram
+>optimize=-O2
+>-m32bit-doubles
+>-fno-exceptions
+>defs::-std=c99
+>-lm
+>-create_library
+>BOARD::ACTIVITYBOARD

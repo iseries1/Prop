@@ -1,0 +1,13 @@
+libmpu9250.c
+mpu9250.h
+mpu9250.c
+mpu9250Reg.h
+>compiler=C
+>memtype=cmm main ram compact
+>optimize=-O2
+>-m32bit-doubles
+>-fno-exceptions
+>defs::-std=c99
+>-lm
+>-create_library
+>BOARD::ACTIVITYBOARD

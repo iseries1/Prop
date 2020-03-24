@@ -1,0 +1,12 @@
+libsettime.c
+settime.c
+settime.h
+>compiler=C
+>memtype=lmm main ram
+>optimize=-O2
+>-m32bit-doubles
+>-fno-exceptions
+>defs::-std=c99
+>-lm
+>-create_library
+>BOARD::ACTIVITYBOARD
