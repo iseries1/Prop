@@ -2,9 +2,14 @@
  * @brief Interface to Nextion display
  * @author Michael Burmeister
  * @date December 21, 2017
- * @version 1.1
+ * @version 1.2
  * 
 */
+
+//#define DEBUG
+
+#define IBUFF 512
+#define OBUFF 512
 
 #include "nextion.h"
 #include "simpletools.h"
@@ -15,16 +20,27 @@ void Nextion_return(void);
 void Nextion_value(void);
 void Nextion_button(void);
 void Nextion_sendme(void);
-void Nextion_touch(void);
+void Nextion_touche(void);
 void Nextion_sleep(void);
 void Nextion_wake(void);
 void Nextion_text(void);
 void Nextion_numeric(void);
-void dorecv(void *);
+void DoSendRecv(void *);
+void Nextion_send(unsigned char);
 
 
 fdserial *nxn;
-unsigned char _DataT[128];
+unsigned char _DataT[OBUFF];
+unsigned char _DataR[IBUFF];
+#ifdef DEBUG
+unsigned char Buffer[2048];
+int pointer = 0;
+#endif
+struct tm *tt;
+int _Head;
+int _Tail;
+char _Rx, _Tx;
+int _Baud;
 int _Index;
 int _Error;
 int  _Reserved;
@@ -39,6 +55,7 @@ int _Event = 0;
 int _XPosition = 0;
 int _YPosition = 0;
 int _Sleep = 0;
+short _REN = 0;
 char _Text[50];
 int _Value = 0;
 
@@ -50,12 +67,23 @@ int Nextion_open(int rx, int tx, int baud)
 {
   int i;
   
-  nxn = fdserial_open(rx, tx, FDSERIAL_MODE_NONE, baud);
+  _Rx = rx;
+  _Tx = tx;
+  _Baud = baud;
+  _Reserved = 0;
+  _SerialNumber[0]=0;
   
+#ifdef DEBUG
+  pointer = 0;
+#endif
   _Error = -1;
   
-  cog = cog_run(&dorecv, 50);
+  cog = cog_run(&DoSendRecv, 50);
   
+  pause(1000);
+  
+  Nextion_cmd("code_c");
+
   pause(1000);
   
   Nextion_cmd("connect");
@@ -69,30 +97,39 @@ int Nextion_open(int rx, int tx, int baud)
 
 void Nextion_close()
 {
-  fdserial_close(nxn);
-  nxn = NULL;
+  _Baud = 0;
+  while (nxn != NULL)
+    pause(1);
 }
   
 void Nextion_cmd(char *c)
 {
-  int i = 0;
-  _Index = 0;
-  
-  for (i=0;i<strlen(c);i++)
-    fdserial_txChar(nxn, c[i]);
+//  while (_Head != _Tail)
+//    pause(1);
 
-  fdserial_txChar(nxn, 0xff);
-  fdserial_txChar(nxn, 0xff);
-  fdserial_txChar(nxn, 0xff);
+  for (int i=0;i<strlen(c);i++)
+    Nextion_send(c[i]);
+
+  Nextion_send(0xff);
+  Nextion_send(0xff);
+  Nextion_send(0xff);
+}
+
+void Nextion_setProperty(char *obj, char *prop, char *val)
+{
+  sprinti(_DataT, "%s.%s=\"%s\"", obj, prop, val);
+  Nextion_cmd(_DataT);
 }
 
 void Nextion_return()
 {
-  int i, j;
   
   if (_Index < 1)
+  {
     return;
-  for (i=0;i<_Index;i++)
+  }
+
+  for (int i=0;i<_Index;i++)
   {
     if (_DataT[i] == 0xff)
       if (_DataT[i+1] == 0xff)
@@ -106,7 +143,7 @@ void Nextion_value()
   char v;
   
   v = _DataT[0];
-  
+
   switch (v)
   {
     case 0x00: _Error = 0; //Invalid instruction
@@ -144,22 +181,31 @@ void Nextion_value()
     case 0x24: // serial buffer overflow
       break;
     case 0x63: Nextion_connect(); // process connect command
+      _REN = 19;
       break;
     case 0x65: Nextion_button(); // process object touch
+      _REN = 21;
       break;
     case 0x66: Nextion_sendme(); // process sendme command
+      _REN = 22;
       break;
-    case 0x67: Nextion_touch(); // process touch event
+    case 0x67: Nextion_touche(); // process touch event
+      _REN = 23;
       break;
-    case 0x68: Nextion_touch(); // process sleep event
+    case 0x68: Nextion_touche(); // process sleep event
+      _REN = 24;
       break;
     case 0x70: Nextion_text(); // process text value
+      _REN = 25;
       break;
     case 0x71: Nextion_numeric(); // process number value
+      _REN = 26;
       break;
     case 0x86: Nextion_sleep(); // process panel sleep
+      _REN = 27;
       break;
     case 0x87: Nextion_wake(); // process panel wake
+      _REN = 28;
       break;
     case 0x88: // process panel power on
     case 0x89: // process sd card load
@@ -168,6 +214,7 @@ void Nextion_value()
       break;
     default: _Error = 0;
   }
+
   _Index = 0;
 }
 
@@ -216,30 +263,72 @@ void Nextion_connect()
 int Nextion_error()
 {
   int i;
-  
+
   i = _Error;
   _Error = -1;
   return i;
 }
 
-void dorecv(void *par)
+void DoSendRecv(void *par)
 {
-  while (nxn != NULL)
+  
+  nxn = fdserial_open(_Rx, _Tx, FDSERIAL_MODE_NONE, _Baud);
+  
+  _Head = 0;
+  _Tail = 0;
+
+  while (_Baud != 0)
   {
-    if (fdserial_rxReady(nxn) > 0)
+    while (fdserial_rxReady(nxn) > 0)
     {
       _DataT[_Index] = fdserial_rxChar(nxn);
-      if (_Index++ > 100)
-        _Index = 100;
+#ifdef DEBUG
+      Buffer[pointer++] = _DataT[_Index];
+      Buffer[pointer] = 0;
+#endif
+      if (_Index++ > IBUFF - 10)
+        _Index = IBUFF - 10;
       _DataT[_Index] = 0;
     }
     Nextion_return();
 
-    pause(1);
+    while (_Head != _Tail)
+    {
+#ifdef DEBUG
+      Buffer[pointer++] = _DataR[_Tail];
+#endif
+      fdserial_txChar(nxn, _DataR[_Tail++]);
+      _Tail = _Tail & (OBUFF - 1);
+    }
   }
+  
+  fdserial_close(nxn);
+  nxn = NULL;
   cogstop(cogid());
 }
 
+void Nextion_send(unsigned char s)
+{
+  while (((_Head + 1) & (OBUFF - 1)) == _Tail)
+  {
+    low(18);
+    pause(500);
+    high(18);
+  }    
+  _DataR[_Head++] = s;
+  _Head = _Head & (OBUFF - 1);
+}
+
+short Nextion_event()
+{
+  short i;
+  
+  i = _REN;
+  _REN = 0;
+  
+  return i;
+}
+  
 void Nextion_button()
 {
   _Page = _DataT[1];
@@ -252,7 +341,7 @@ void Nextion_sendme()
   _Page = _DataT[1];
 }
 
-void Nextion_touch()
+void Nextion_touche()
 {
   _XPosition = _DataT[1];
   _XPosition = _XPosition << 8 | _DataT[2];
@@ -298,9 +387,31 @@ char *Nextion_serialno()
   return _SerialNumber;
 }
 
+int Nextion_color(short blue, short green, short red)
+{
+  int color;
+  
+  color = blue | (green << 5) | (red << 11);
+  
+  return color;
+}
+
 int Nextion_page(void)
 {
   return _Page;
+}
+
+void Nextion_setpage(int page)
+{
+  sprinti(_DataT, "page %d", page);
+  Nextion_cmd(_DataT);
+}
+
+void Nextion_cls(int color)
+{
+  sprinti(_DataT, "cls %d", color);
+  Nextion_cmd(_DataT);
+  pause(3000);
 }
 
 int Nextion_getnumeric()
@@ -311,6 +422,12 @@ int Nextion_getnumeric()
 char *Nextion_gettext()
 {
   return _Text;
+}
+
+void Nextion_touchxy(short *x, short *y)
+{
+  *x = _XPosition;
+  *y = _YPosition;
 }
 
 void Nextion_settext(char *var, char *val)
@@ -329,7 +446,6 @@ void Nextion_setbaud(int baud)
 {
   sprinti(_DataT, "baud=%d", baud);
   Nextion_cmd(_DataT);
-  Nextion_close();
 }
 
 void Nextion_setsleep(int t)
@@ -340,6 +456,12 @@ void Nextion_setsleep(int t)
     Nextion_cmd("thup=0");
   else
     Nextion_cmd("thup=1");
+}
+
+void Nextion_touch(int events)
+{
+  sprinti(_DataT, "sendxy=%d", events);
+  Nextion_cmd(_DataT);
 }
 
 void Nextion_setbrightness(int b)
@@ -355,8 +477,65 @@ void Nextion_xstr(short x, short y, short w, short h, char f, int pco, int bco, 
   Nextion_cmd(_DataT);
 }
 
+void Nextion_fill(short x, short y, short width, short height, int color)
+{
+  sprinti(_DataT, "fill %d,%d,%d,%d,%d", x, y, width, height, color);
+  Nextion_cmd(_DataT);
+}
+
+void Nextion_line(short x, short y, short x1, short y1, int color)
+{
+  sprinti(_DataT, "line %d,%d,%d,%d,%d", x, y, x1, y1, color);
+  Nextion_cmd(_DataT);
+}
+
+void Nextion_circle(short x, short y, short radius, int color)
+{
+  sprinti(_DataT, "cir %d,%d,%d,%d", x, y, radius, color);
+  Nextion_cmd(_DataT);
+}
+
+void Nextion_fillcircle(short x, short y, short radius, int color)
+{
+  sprinti(_DataT, "cirs %d,%d,%d,%d", x, y, radius, color);
+  Nextion_cmd(_DataT);
+}
+
 void Nextion_click(char *item, char value)
 {
   sprinti(_DataT, "click %s,%d", item, value);
   Nextion_cmd(_DataT);
 }
+
+void Nextion_settime(long i)
+{
+  tt = localtime(&i);
+  i = tt->tm_year+1900;
+  sprinti(_DataT, "rtc0=%d", i);
+  Nextion_cmd(_DataT);
+  i = tt->tm_mon;
+  sprinti(_DataT, "rtc1=%d", i);
+  Nextion_cmd(_DataT);
+  i = tt->tm_mday;
+  sprinti(_DataT, "rtc2=%d", i);
+  Nextion_cmd(_DataT);
+  i = tt->tm_hour;
+  sprinti(_DataT, "rtc3=%d", i);
+  Nextion_cmd(_DataT);
+  i = tt->tm_min;
+  sprinti(_DataT, "rtc4=%d", i);
+  Nextion_cmd(_DataT);
+  i = tt->tm_sec;
+  sprinti(_DataT, "rtc5=%d", i);
+  Nextion_cmd(_DataT);
+}
+
+unsigned char* Nextion_buffer(void)
+{
+  unsigned char *X;
+#ifdef DEBUG
+  X = Buffer;
+#endif
+  return X;
+}
+  

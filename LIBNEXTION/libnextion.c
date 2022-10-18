@@ -5,12 +5,15 @@
  * @version 1.0
  * 
 */
-#include "fdserial.h"
+//#include "fdserial.h"
 #include "simpletools.h"
 #include "nextion.h"
 
-#define Rx 1
-#define Tx 0
+#define Rx 15
+#define Tx 14
+unsigned char *Buf;
+
+short X, Y;
 
 
 int main()
@@ -20,16 +23,62 @@ int main()
   print("Open Port\n");
   
   i = Nextion_open(Rx, Tx, 9600);
+//  Nextion_setbaud(115200);
+//  i = Nextion_open(Rx, Tx, 115200);
   
   print("Nextion: %d\n", i);
   
-  print("Serial Number: %s\n", Nextion_serialno());
+  printi("Serial Number: %s\n", Nextion_serialno());
   
- 
+  printi("Event: %d\n", Nextion_event());
+  
+  Nextion_cls(0);
+  
+  i = Nextion_color(0, 63, 0);
+
+  Nextion_fill(20, 50, 20, 20, i);
+  
+  Nextion_line(20, 100, 100, 100, i);
+  
+  Nextion_circle(20, 200, 10, i);
+  
+  Nextion_fillcircle(100, 200, 10, i);
+  
+  Nextion_xstr(20, 150, 100, 30, 1, i, 0, 0, 0, 3, "Test Data");
+  
+  print("Color: %d\n", i);
+  
+  Nextion_touch(1);
+  
+  pause(1000);
+  
+  Buf = Nextion_buffer();
+  
+  for (i=0;i<strlen(Buf);i++)
+  {
+    if (Buf[i] == 0xff)
+    {
+      putChar('\n');
+      i += 2;
+    }      
+    else
+      putChar(Buf[i]);
+  }          
+
+  printi("\n");
   
   while(1)
   {
-    
-    
+    pause(500);
+    i = Nextion_event();
+    if (i != 0)
+    {
+      printi("Event: %d\n", i);
+      if (i == 23)
+      {
+        Nextion_touchxy(&X, &Y);
+        printi("X: %d, Y: %d\n", X, Y);
+      }
+    }              
   }  
 }

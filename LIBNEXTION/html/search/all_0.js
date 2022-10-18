@@ -1,4 +1,32 @@
 var searchData=
 [
-  ['custom_20libraries',['Custom Libraries',['../index.html',1,'']]]
+  ['nextion_2eh_0',['nextion.h',['../nextion_8h.html',1,'']]],
+  ['nextion_5fbuffer_1',['Nextion_buffer',['../nextion_8h.html#ad20bd4410d3d3f8893f27756bdee377c',1,'nextion.c']]],
+  ['nextion_5fcircle_2',['Nextion_circle',['../nextion_8h.html#a71f967f33d02fef972b0157f2104f579',1,'nextion.c']]],
+  ['nextion_5fclick_3',['Nextion_click',['../nextion_8h.html#a9c25f3abb3fe2185a065b18a80264b9b',1,'nextion.c']]],
+  ['nextion_5fclose_4',['Nextion_close',['../nextion_8h.html#a7a9a102f67e5942ff5b12ddde95e3648',1,'nextion.c']]],
+  ['nextion_5fcls_5',['Nextion_cls',['../nextion_8h.html#a5725a8653be6c90bfa9b02db74bdfa74',1,'nextion.c']]],
+  ['nextion_5fcmd_6',['Nextion_cmd',['../nextion_8h.html#a01f3ae2a962faa38e2d991771a20cae0',1,'nextion.c']]],
+  ['nextion_5fcolor_7',['Nextion_color',['../nextion_8h.html#ad002ac41ea37b755683662241e3a4fbb',1,'nextion.c']]],
+  ['nextion_5ferror_8',['Nextion_error',['../nextion_8h.html#afd6e75233db95551c7bc4ad10d94dbf3',1,'nextion.c']]],
+  ['nextion_5fevent_9',['Nextion_event',['../nextion_8h.html#ad69a07474d30dc5fcef3ff60ff54bc06',1,'nextion.c']]],
+  ['nextion_5ffill_10',['Nextion_fill',['../nextion_8h.html#aae38b48f17b5f754a988ccd4bfd66354',1,'nextion.c']]],
+  ['nextion_5ffillcircle_11',['Nextion_fillcircle',['../nextion_8h.html#a57ba2bff6643de3aa1741b204d99b0a9',1,'nextion.c']]],
+  ['nextion_5fgetnumeric_12',['Nextion_getnumeric',['../nextion_8h.html#a5ff15595b0d0ed50ec724a57379f29cc',1,'nextion.c']]],
+  ['nextion_5fgettext_13',['Nextion_gettext',['../nextion_8h.html#a5e1e40e014702d099e7a0841d867a1c9',1,'nextion.c']]],
+  ['nextion_5fline_14',['Nextion_line',['../nextion_8h.html#a668447490d7841ea28a875ef608c5375',1,'nextion.c']]],
+  ['nextion_5fopen_15',['Nextion_open',['../nextion_8h.html#aa1c68339a4491332b1da1c5361cb3be6',1,'nextion.c']]],
+  ['nextion_5fpage_16',['Nextion_page',['../nextion_8h.html#aeb93fc10e2fcc6211d5f1549717f5b05',1,'nextion.c']]],
+  ['nextion_5fserialno_17',['Nextion_serialno',['../nextion_8h.html#aed500b1d8f5b8cbf6aac72795afc417a',1,'nextion.c']]],
+  ['nextion_5fsetbaud_18',['Nextion_setbaud',['../nextion_8h.html#a21c8f5d9b462514a4ec882ebb272c48d',1,'nextion.c']]],
+  ['nextion_5fsetbrightness_19',['Nextion_setbrightness',['../nextion_8h.html#aecfc81ea55d2c174f7d742889111a8ae',1,'nextion.c']]],
+  ['nextion_5fsetnumeric_20',['Nextion_setnumeric',['../nextion_8h.html#a009f4c5f2fffff240d573735ea2acd22',1,'nextion.c']]],
+  ['nextion_5fsetpage_21',['Nextion_setpage',['../nextion_8h.html#a4cd0074f9f562841dafef35437e46274',1,'nextion.c']]],
+  ['nextion_5fsetproperty_22',['Nextion_setProperty',['../nextion_8h.html#a8364674d5cac6f2802e0c6aa2dc4bacf',1,'nextion.c']]],
+  ['nextion_5fsetsleep_23',['Nextion_setsleep',['../nextion_8h.html#a121306b98420d2b39e83478b73b64607',1,'nextion.c']]],
+  ['nextion_5fsettext_24',['Nextion_settext',['../nextion_8h.html#ad1af4beb03bb5b0895ab3cf348bd0aa6',1,'nextion.c']]],
+  ['nextion_5fsettime_25',['Nextion_settime',['../nextion_8h.html#a5f074c2d388e6be59a970a37c3ee5686',1,'nextion.c']]],
+  ['nextion_5ftouch_26',['Nextion_touch',['../nextion_8h.html#a8367bedfa3c4919ff597d6027c4c6a50',1,'nextion.c']]],
+  ['nextion_5ftouchxy_27',['Nextion_touchxy',['../nextion_8h.html#ad3d6da9ab707e86f09036500956d0d44',1,'nextion.c']]],
+  ['nextion_5fxstr_28',['Nextion_xstr',['../nextion_8h.html#aa7607951e326aab6995e98c9e17b70c2',1,'nextion.c']]]
 ];
