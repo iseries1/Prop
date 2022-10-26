@@ -5,7 +5,7 @@
  * @version 1.0
  * 
 */
-//#include "fdserial.h"
+
 #include "simpletools.h"
 #include "nextion.h"
 
@@ -52,20 +52,7 @@ int main()
   
   pause(1000);
   
-  Buf = Nextion_buffer();
-  
-  for (i=0;i<strlen(Buf);i++)
-  {
-    if (Buf[i] == 0xff)
-    {
-      putChar('\n');
-      i += 2;
-    }      
-    else
-      putChar(Buf[i]);
-  }          
-
-  printi("\n");
+  Nextion_debug();
   
   while(1)
   {
@@ -76,8 +63,9 @@ int main()
       printi("Event: %d\n", i);
       if (i == 23)
       {
-        Nextion_touchxy(&X, &Y);
-        printi("X: %d, Y: %d\n", X, Y);
+        i = Nextion_touchxy(&X, &Y);
+        if (i == 0)
+          printi("X: %d, Y: %d\n", X, Y);
       }
     }              
   }  

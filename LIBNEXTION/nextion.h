@@ -92,8 +92,9 @@ char *Nextion_gettext(void);
  * @brief get touch event location
  * @param x pointer to x value
  * @param y pointer to y value
+ * @return touch type 0 - press 1 - release
  */
-void Nextion_touchxy(short *x, short *y);
+int Nextion_touchxy(short *x, short *y);
 
 /**
  * @brief set text value for text object
@@ -131,6 +132,14 @@ void Nextion_setsleep(int t);
  * @param b brightness level 0 - 100
  */
 void Nextion_setbrightness(int b);
+
+/**
+ * @brief get object touch event
+ * @param page value
+ * @param id object id
+ * @return touch value 0 - down, 1 - up
+ */
+int Nextion_gettouch(short *page, short *id);
 
 /**
  * @brief enable/disable page touch events
@@ -208,4 +217,4 @@ void Nextion_settime(long i);
 /**
  * @brief debug output
  */
-unsigned char* Nextion_buffer(void);
+void Nextion_debug(void);

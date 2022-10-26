@@ -27,7 +27,7 @@ void Nextion_text(void);
 void Nextion_numeric(void);
 void DoSendRecv(void *);
 void Nextion_send(unsigned char);
-
+void Nextion_debug(void);
 
 fdserial *nxn;
 unsigned char _DataT[OBUFF];
@@ -54,6 +54,7 @@ int _Button = 0;
 int _Event = 0;
 int _XPosition = 0;
 int _YPosition = 0;
+int _Touch;
 int _Sleep = 0;
 short _REN = 0;
 char _Text[50];
@@ -73,9 +74,6 @@ int Nextion_open(int rx, int tx, int baud)
   _Reserved = 0;
   _SerialNumber[0]=0;
   
-#ifdef DEBUG
-  pointer = 0;
-#endif
   _Error = -1;
   
   cog = cog_run(&DoSendRecv, 50);
@@ -104,9 +102,6 @@ void Nextion_close()
   
 void Nextion_cmd(char *c)
 {
-//  while (_Head != _Tail)
-//    pause(1);
-
   for (int i=0;i<strlen(c);i++)
     Nextion_send(c[i]);
 
@@ -333,7 +328,7 @@ void Nextion_button()
 {
   _Page = _DataT[1];
   _Button = _DataT[2];
-  _Event = _DataT[3];
+  _Touch = _DataT[3];
 }
 
 void Nextion_sendme()
@@ -347,7 +342,7 @@ void Nextion_touche()
   _XPosition = _XPosition << 8 | _DataT[2];
   _YPosition = _DataT[3];
   _YPosition = _YPosition << 8 | _DataT[4];
-  _Event = _DataT[5];
+  _Touch = _DataT[5];
 }
 
 void Nextion_sleep()
@@ -424,10 +419,18 @@ char *Nextion_gettext()
   return _Text;
 }
 
-void Nextion_touchxy(short *x, short *y)
+int Nextion_gettouch(short *page, short *id)
+{
+  *page = _Page;
+  *id = _Button;
+  return _Touch;
+}
+
+int Nextion_touchxy(short *x, short *y)
 {
   *x = _XPosition;
   *y = _YPosition;
+  return _Touch;
 }
 
 void Nextion_settext(char *var, char *val)
@@ -530,12 +533,20 @@ void Nextion_settime(long i)
   Nextion_cmd(_DataT);
 }
 
-unsigned char* Nextion_buffer(void)
+void Nextion_debug(void)
 {
-  unsigned char *X;
 #ifdef DEBUG
-  X = Buffer;
+  for (int i=0;i<strlen(Buffer);i++)
+  {
+    if (Buffer[i] == 0xff)
+    {
+      putChar('\n');
+      i += 2;
+    }      
+    else
+      putChar(Buffer[i]);
+  }
 #endif
-  return X;
+  putChar('\n');
 }
   
