@@ -40,7 +40,7 @@ int main()
 //  i = esp8266_set("station-ipaddr", "101.1.1.43&101.1.1.4&255.255.255.0&101.1.1.1");
 //  print("StationIP: %d\n", i);
 
-//  i = esp8266_join("NETGEAR07", "oddtulip351");
+//  i = esp8266_join("WiFi?", "Password?");
 //  print("Join: %d\n", i);
   pause(1000);
   //memset(Buffer, 0, sizeof(Buffer));
