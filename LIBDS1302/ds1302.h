@@ -4,8 +4,7 @@
  * @author Michael Burmeister
  * @date January 14, 2017
  * @version 1.2
- * @mainpage Custom Libraries
- * <a href="ds1302_8h.html">WaveShare Clock Module</a><br>
+ * 
 */
 
 /**

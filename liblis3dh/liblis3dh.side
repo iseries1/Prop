@@ -1,0 +1,12 @@
+liblis3dh.c
+lis3dh.c
+lis3dh.h
+lis3dhreg.h
+>compiler=C
+>memtype=lmm main ram
+>optimize=-Os
+>-m32bit-doubles
+>-fno-exceptions
+>defs::-std=c99
+>-lm
+>BOARD::ACTIVITYBOARD

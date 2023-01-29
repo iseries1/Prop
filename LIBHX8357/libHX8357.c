@@ -7,15 +7,15 @@
 
 #include "simpletools.h"
 #include "HX8357.h"
-#include "HX8357Reg.h"
 
-#define LITE 14
-#define RST 13
-#define DC 12
-#define CS 11
-#define MOSI 10
-#define MISO 9
-#define CLK 8
+
+#define LITE 9
+#define RST 10
+#define DC 11
+#define CS 12
+#define MOSI 13
+#define MISO 14
+#define CLK 15
 
 int i;
 unsigned long PCNT;
@@ -33,7 +33,7 @@ int main()
   if ((i & 0x04) == 0)
     HX8357_displayOn(1);
   
-  i = readCmd(HX8357_RDMADCTL);
+  i = HX8357_control();
   print("Control: %x\n", i);
 
   HX8357_rotation(1);

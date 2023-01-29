@@ -1,74 +1,64 @@
 /**
  * @file ms5607.h
- * @brief Read Barometric Pressure Sensor
+ * @brief MS5607 pressure drive
  * @author Michael Burmeister
- * @date January 25, 2016
- * @version 1.1
- * @mainpage Custom Libraries
- * <a href="ms5607_8h.html">MS5607 Barometric Pressure Sensor.</a><br>
+ * @date May 24, 2020
+ * @version 1.0
+ * 
 */
 
-#ifndef MS5607_H
-#define MS5607_H
-
-#include "simplei2c.h"
+#define RSLT_256 0x00
+#define RSLT_512 0x02
+#define RSLT_1024 0x04
+#define RSLT_2048 0x06
+#define RSLT_4096 0x08
 
 /**
- * @brief Open connection to ms5607
- *
- * @param SCL i2c Clock Pin
- * @param SDA i2c Data Pin
- * @return Cog number of compass connection
-*/
-int ms5607_open(int SCL, int SDA);
+ * @brief initialize MS5607 driver
+ * @param scl clock pin
+ * @param sda data pin
+ * @param osr over sample rate value (RSLT_256, RSLT_512, RSLT_1024, RSLT_2048, RSLT_4096)
+ * @return 1 check sum or zero if not found
+ */
+int ms5607_init(int scl, int sda, int osr);
 
 /**
- * @brief Close connection to ms5607
- *
- * @return Nothing
-*/
+ * @brief disconnect driver
+ */
 void ms5607_close(void);
 
 /**
- * @brief Get current tempreture in celsius
- *
- * @return Celsius
-*/
-int ms5607_celsius(void);
+ * @brief get raw temperature
+ * @return temperature
+ */
+int ms5607_rawtemperature(void);
 
 /**
- * @brief Get current tempreture in fahrenheit
- *
- * @return Fahrenheit
-*/
+ * @brief get raw air pressure in millibars
+ * @return pressure
+ */
+int ms5607_rawpressure(void);
+
+/**
+ * @brief get temperature in celcius
+ * @return temperature * 100
+ */
+int ms5607_temperature(void);
+
+/**
+ * @brief get temperature in fahrenheit
+ * @return temperature * 100
+ */
 int ms5607_fahrenheit(void);
 
 /**
- * @brief Get current pressure in millibars
- *
- * @return Millibars
-*/
+ * @brief get pressure in millibars
+ * @return pressure
+ */
 int ms5607_pressure(void);
 
 /**
- * @brief Get current pressure in hundredths of an Inch of Mercury
- *
- * @return Millibars
-*/
+ * @brief get pressure in millimeters of mercury
+ * @return mercury
+ */
 int ms5607_mercury(void);
-
-/**
- * @brief Get raw temperature
- *
- * @return Temp
-*/
-int ms5607_rawtemp(void);
-
-/**
- * @brief Get raw pressure
- *
- * @return Pressure
-*/
-int ms5607_rawpressure(void);
-
-#endif

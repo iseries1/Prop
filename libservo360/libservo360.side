@@ -1,0 +1,15 @@
+libservo360.c
+servo360.c
+servo360.h
+-I ./../libtimer
+-L ./../libtimer
+>compiler=C
+>memtype=lmm main ram
+>optimize=-Os
+>-m32bit-doubles
+>-fno-exceptions
+>defs::-std=c99
+>-lm
+>-create_library
+>linker::-ltimer
+>BOARD::ACTIVITYBOARD

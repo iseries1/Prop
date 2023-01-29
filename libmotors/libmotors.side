@@ -1,0 +1,12 @@
+libmotors.c
+motors.c
+motors.h
+>compiler=C
+>memtype=lmm main ram
+>optimize=-O2
+>-m32bit-doubles
+>-fno-exceptions
+>defs::-std=c99
+>-lm
+>-create_library
+>BOARD::ACTIVITYBOARD

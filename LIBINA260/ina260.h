@@ -4,8 +4,7 @@
  * @author Michael Burmeister
  * @date June 23, 2019
  * @version 1.0
- * @mainpage Custom Libraries
- * <a href="ina260_8h.html">INA260 Voltage and Current Monitor.</a><br>
+ * 
 */
 
 #define INA260_I2CADDR 0x40

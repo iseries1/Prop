@@ -12,7 +12,7 @@
 int doWait(void);
 int Recv(void);
 void Results(void);
-int millis(void);
+static int millis(void);
 
 // WiFi Commands
 
@@ -55,7 +55,7 @@ fdserial *esp8266_open(int rx, int tx)
   pause(1);
   
   _esp = fdserial_open(_RX, _TX, FDSERIAL_MODE_NONE, 115200);
-  dprint(_esp,"\r");
+  dprinti(_esp,"\r");
   return _esp;
 }
 
@@ -65,7 +65,7 @@ int esp8266_connect(char *url, short port)
   
   strcpy(_URL, url);
   i = Recv();
-  dprint(_esp, "%c%c%s,%d\r", CMD, CONNECT, url, port);
+  dprinti(_esp, "%c%c%s,%d\r", CMD, CONNECT, url, port);
   if (doWait() <= 0)
     return -1;
   if (_Status == 'S')
@@ -104,7 +104,7 @@ int esp8266_sendbin(char handle, unsigned char *data, short size)
 {
   int i, j;
   
-  dprint(_esp, "%c%c%d,%d\r", CMD, SEND, handle, size);
+  dprinti(_esp, "%c%c%d,%d\r", CMD, SEND, handle, size);
   for (j=0;j<size;j+=32)
   {
     i = size - j;
@@ -134,7 +134,7 @@ int esp8266_recv(char handle, char *data, int size)
   if (size > 1024)
     size = 1024;
   
-  dprint(_esp, "%c%c%d,%d\r", CMD, RECV, handle, size);
+  dprinti(_esp, "%c%c%d,%d\r", CMD, RECV, handle, size);
   i = doWait();
 
   if (i <= 0)
@@ -162,7 +162,7 @@ int esp8266_udp(char *url, short port)
   int i;
   
   i = Recv();
-  dprint(_esp, "%c%c%s,%d\r", CMD, UDP, url, port);
+  dprinti(_esp, "%c%c%s,%d\r", CMD, UDP, url, port);
   if (doWait() <= 0)
     return -1;
   if (_Status == 'S')
@@ -172,14 +172,14 @@ int esp8266_udp(char *url, short port)
   
 void esp8266_close(char handle)
 {
-  dprint(_esp, "%c%c%d\r", CMD, CLOSE, handle);
+  dprinti(_esp, "%c%c%d\r", CMD, CLOSE, handle);
   doWait();
 }
 
 int esp8266_join(char *ssd, char *pwd)
 {
   int i;
-  dprint(_esp, "%c%c%s,%s\r", CMD, JOIN, ssd, pwd);
+  dprinti(_esp, "%c%c%s,%s\r", CMD, JOIN, ssd, pwd);
   if (doWait() <= 0)
     return -1;
   if (_Status == 'S')
@@ -190,7 +190,7 @@ int esp8266_join(char *ssd, char *pwd)
 int esp8266_set(char *env, char *value)
 {
   int i;
-  dprint(_esp, "%c%c%s,%s\r", CMD, SET, env, value);
+  dprinti(_esp, "%c%c%s,%s\r", CMD, SET, env, value);
   if (doWait() <= 0)
     return -1;
   if (_Status == 'S')
@@ -201,7 +201,7 @@ int esp8266_set(char *env, char *value)
 char *esp8266_check(char *env)
 {
   int i;
-  dprint(_esp, "%c%c%s\r", CMD, CHECK, env);
+  dprinti(_esp, "%c%c%s\r", CMD, CHECK, env);
   i = doWait();
 
   if (i <= 0)
@@ -217,7 +217,7 @@ int esp8266_poll(int mask)
 {
   int i;
 
-  dprint(_esp, "%c%c%d\r", CMD, POLL, mask);
+  dprinti(_esp, "%c%c%d\r", CMD, POLL, mask);
   i = doWait();
   if (i == 0)
     return i;
@@ -231,7 +231,7 @@ int esp8266_listen(char protocol, char *uri)
 {
   int i;
   
-  dprint(_esp, "%c%c%c%s\r", CMD, LISTEN, protocol, uri);
+  dprinti(_esp, "%c%c%c%s\r", CMD, LISTEN, protocol, uri);
   if (doWait() <= 0)
     return -1;
   if (_Status == 'S')
@@ -245,7 +245,7 @@ int esp8266_reply(char handle, char *data)
   int size;
   
   size = strlen(data);
-  dprint(_esp, "%c%c%d,200,%d\r", CMD, REPLY, handle, size);
+  dprinti(_esp, "%c%c%d,200,%d\r", CMD, REPLY, handle, size);
   for (j=0;j<size;j+=32)
   {
     i = size - j;
@@ -270,7 +270,7 @@ int esp8266_reply(char handle, char *data)
 char* esp8266_path(char handle)
 {
   
-  dprint(_esp, "%c%c%d\r", CMD, PATH, handle);
+  dprinti(_esp, "%c%c%d\r", CMD, PATH, handle);
   if (doWait() <= 0)
     return NULL;
   
@@ -283,7 +283,7 @@ char* esp8266_path(char handle)
 char* esp8266_arg(char handle, char* name)
 {
   
-  dprint(_esp, "%c%c%d,%s\r", CMD, ARG, handle, name);
+  dprinti(_esp, "%c%c%d,%s\r", CMD, ARG, handle, name);
   if (doWait() <= 0)
     return NULL;
   
@@ -295,7 +295,7 @@ char* esp8266_arg(char handle, char* name)
 
 int esp8266_sleep(char type, int microsec)
 {
-  dprint(_esp, "%c%c%c,%d\r", CMD, SLEEP, type, microsec);
+  dprinti(_esp, "%c%c%c,%d\r", CMD, SLEEP, type, microsec);
   if (doWait() <= 0)
     return -1;
   if (_Status == 'S')
@@ -344,6 +344,8 @@ int Recv()
         _Buffer[i++] = fdserial_rxChar(_esp);
 
       _Buffer[i] = 0;
+      if (i > 1023)
+        return i;
     }
     pause(1);
     t += millis();
@@ -358,20 +360,20 @@ void esp8266_print(char *data, int size)
   {
     if(data[n] <= 128 && data[n] >= ' ')
     {
-      dprint(_esp, "%c", data[n]);
+      dprinti(_esp, "%c", data[n]);
     }      
     else if(data[n] == 0)
     {
-      dprint(_esp, "[%x]", data[n]);
+      dprinti(_esp, "[%x]", data[n]);
       break;
     }      
     else if(data[n] == '\n')
     {
-      dprint(_esp, "%c", '\n');
+      dprinti(_esp, "%c", '\n');
     }
     else
     {
-      dprint(_esp, "[%x]", data[n]);
+      dprinti(_esp, "[%x]", data[n]);
     }      
   }  
 }
@@ -386,7 +388,7 @@ void Results()
   _SValue = atoi(&_Buffer[4]);
 }
 
-int millis()
+static int millis()
 {
   long t;
   

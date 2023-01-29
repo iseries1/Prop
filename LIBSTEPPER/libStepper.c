@@ -9,6 +9,9 @@
 #include "simpletools.h"
 #include "Stepper.h"
 
+void doSpeed(void);
+void doSingle(void);
+
 #define ENABLEA 8
 #define DIRECTIONA 10
 #define STEPA 9
@@ -26,22 +29,15 @@ int main()
 
   Stepper_enable(1);
  
-  Stepper_direction(2,1);
+  Stepper_direction(1,2);
   
 
-//  doSingle();
+  doSingle();
   
   printi("Done\n");
   
-  printi("Speed\n");
+//  doSpeed();
 
-  for (i=0;i<256;i++)
-  {
-    Stepper_speed(i, i);
-    print("Speed: %d\n", i);
-    pause(500);
-  }
-  
   Stepper_speed(0,0);
   Stepper_enable(0);
   
@@ -54,6 +50,17 @@ int main()
   }  
 }
 
+void doSpeed()
+{
+  printi("Speed\n");
+
+  for (i=0;i<256;i++)
+  {
+    Stepper_speed(i, i);
+    print("Speed: %d\n", i);
+    pause(500);
+  }
+}  
 
 void doSingle()
 {
@@ -61,7 +68,7 @@ void doSingle()
   {
     printi(".");
     Stepper_single(1,1);
-    pause(5000);
+    pause(1);
   }
 }
   

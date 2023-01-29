@@ -4,8 +4,7 @@
  * @author Michael Burmeister
  * @date December 19, 2016
  * @version 1.0
- * @mainpage Custom Libraries
- * <a href="mpu9250_8h.html">MPU9250 9 Degrees of Freedom Driver.</a><br>
+ * 
  */
 #include "mpu9250Reg.h"
 

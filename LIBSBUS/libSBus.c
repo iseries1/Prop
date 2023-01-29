@@ -13,7 +13,7 @@
 
 int main()
 {
-  int i;
+  int i, j, k;
   int p;
   int Max[17], Min[17];
   int W;
@@ -57,10 +57,13 @@ int main()
   
   while(1)
   {
-    i = SBus_getScaledChannel(2);
+    //i = SBus_getScaledChannel(3);
+    i = SBus_getChannel(1);
+    j = SBus_getChannel(2);
+    k = SBus_getChannel(3);
     if (i != p)
     {
-      print("%d ", i);
+      print("%2.2x %2.2x %2.2x \n", i, j, k);
       p = i;
     }
       

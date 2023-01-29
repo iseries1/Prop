@@ -4,8 +4,7 @@
  * @author Michael Burmeister
  * @date March 30, 2019
  * @version 1.0
- * @mainpage Custom Libraries
- * <a href="laserping_8h.html">Parallax Laser Ping Driver.</a><br>
+ * 
 */
 
 /**

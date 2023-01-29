@@ -4,8 +4,7 @@
  * @author Michael Burmeister
  * @date July 30, 2018
  * @version 1.2
- * @mainpage Custom Libraries
- * <a href="newhaven_8h.html">NewHaven Display Driver.</a><br>
+ * 
 */
 
 #include "newhavenreg.h"

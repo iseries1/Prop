@@ -4,8 +4,7 @@
  * @date January 15, 2015
  * @brief This library adds functions for using the Parallax LCD Display
  * These functions convert the byte code data into functions for easy reference
- * @mainpage Custom Libraries
- * <a href="lcddisplay_8h.html">Parallax LCD Driver.</a><br>
+ * 
 */
 
 #include "simpletools.h"

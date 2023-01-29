@@ -9,9 +9,11 @@
 #include "simpletools.h"
 #include "bme280.h"
 
+void doReset(void);
 
-#define BMESCL 0
-#define BMESDA 1
+
+#define BMESCL 1
+#define BMESDA 0
 
 
 int main()
@@ -24,13 +26,7 @@ int main()
   
   print("should be hex (60):%x \n", i);
   
-  BME280_reset();
-  
-  BME280_setHumidity(oversample_1);
-  BME280_setTemp(oversample_1);
-  BME280_setPressure(oversample_1);
-  BME280_setStandbyRate(standby625);
-  BME280_setMode(BME280_normal);
+  doReset();
   
   i = BME280_getMode();
   print("Mode: %x \n", i);
@@ -39,12 +35,21 @@ int main()
   
   while(1)
   {
+    j = 0;
     while (i != 0)
     {
-      j = 1;
+      j++;
       putBinLen(i,8);
-      pause(5000);
+      putChar('\n');
+      pause(1000);
       i = BME280_getStatus();
+      i = i & 0x09;
+      if (j > 4)
+      {
+        doReset();
+        print("Reset\n");
+        j = 0;
+      }        
     }
     
     if (j != 0)
@@ -56,7 +61,7 @@ int main()
     i = BME280_getTempF();
 //    f = BME280_getTemperature();
 //    printf("Temp: %d %2.2f ", i, f);
-    print("Temp: %d ", i/100);
+    print("Temp: %d ", i);
     
     i = BME280_getPressure();
 //    f = BME280_getPressuref();
@@ -72,3 +77,16 @@ int main()
     pause(1000);
   }  
 }
+
+void doReset()
+{
+  BME280_reset();
+  
+  BME280_setHumidity(oversample_1);
+  BME280_setTemp(oversample_1);
+  BME280_setPressure(oversample_1);
+  BME280_setStandbyRate(standby625);
+  BME280_setMode(BME280_normal);
+  pause(250);
+}
+  

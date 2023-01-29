@@ -31,7 +31,7 @@ int main()
   
   printi("Power: %d\n", i);
   
-  INA260_setConfig(INA260_BOTH_CONTINUOUS, INA260_1100, INA260_1100, INA260_AVG1024, 0);
+  //INA260_setConfig(INA260_BOTH_CONTINUOUS, INA260_1100, INA260_1100, INA260_AVG1024, 0);
   
   i = INA260_getConfig();
   
@@ -39,10 +39,10 @@ int main()
   
   while(1)
   {
-    pause(1000);
+    pause(500);
     i = INA260_getCurrent();
-    printi("Current: %d  ", i);
-    i = INA260_getVoltage();
-    printi("Voltage: %d\n", i);
+    printi("Current: %d ma ", i);
+    i = INA260_getVoltage() *10;
+    printi("Voltage: %d mv\n", i);
   }  
 }

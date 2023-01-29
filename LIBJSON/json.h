@@ -4,8 +4,7 @@
  * @author Michael Burmeister
  * @date December 29, 2018
  * @version 1.5
- * @mainpage Custom Libraries
- * <a href="json_8h.html">JSON Encoding and Decoding Data.</a><br>
+ * 
 */
 
 /**

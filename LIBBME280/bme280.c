@@ -11,8 +11,8 @@
 #include "bme280.h"
 
 static void BME280_writeByte(unsigned char , unsigned char );
-static unsigned char BME280_readByte(unsigned char);
-static void BME280_readBytes(unsigned char , unsigned char , unsigned char *);
+static int BME280_readByte(unsigned char);
+static int BME280_readBytes(unsigned char , unsigned char , unsigned char *);
 static void BME280_calibration(void);
 
 
@@ -153,8 +153,10 @@ int BME280_getPressure(void)
   int v1, v2, v3, v4;
   unsigned int v5;
   
-  BME280_readBytes(BME280_PD, 3, Buffer);
-  
+  i = BME280_readBytes(BME280_PD, 3, Buffer);
+  if (i < 0)
+    return i;
+
   i = Buffer[0];
   i = i << 8;
   i = i | Buffer[1];
@@ -192,7 +194,9 @@ int BME280_getTemp(void)
   int i;
   int v1, v2;
   
-  BME280_readBytes(BME280_TD, 3, Buffer);
+  i = BME280_readBytes(BME280_TD, 3, Buffer);
+  if (i < 0)
+    return i;
   
   i = Buffer[0];
   i = i << 8;
@@ -218,7 +222,9 @@ int BME280_getHumidity(void)
   int i;
   int v1, v2, v3, v4, v5;
   
-  BME280_readBytes(BME280_HD, 2, Buffer);
+  i = BME280_readBytes(BME280_HD, 2, Buffer);
+  if (i < 0)
+    return i;
   
   i = Buffer[0];
   i = i << 8;
@@ -254,6 +260,7 @@ int BME280_getTempF()
   int i;
   
   i = BME280_getTemp();
+  
   i = i * 9/5 + 3200;
   return i;
 }
@@ -371,11 +378,11 @@ void BME280_writeByte(unsigned char subAddress, unsigned char data)
  * @param subAddress device register or location on device
  * @return byte value
 */
-unsigned char BME280_readByte(unsigned char subAddress)
+int BME280_readByte(unsigned char subAddress)
 {
   int i;
   unsigned char data;
-  
+
   i = i2c_in(&bme, BME280_ADDRESS, subAddress, 1, &data, 1);
   if (i == 0)
     return -1;
@@ -389,13 +396,13 @@ unsigned char BME280_readByte(unsigned char subAddress)
  * @param cnt number of bytes to read
  * @param dest returned byte of data from device
 */
-void BME280_readBytes(unsigned char subAddress, unsigned char cnt, unsigned char *dest)
+int BME280_readBytes(unsigned char subAddress, unsigned char cnt, unsigned char *dest)
 {
   int i;
   
   i = i2c_in(&bme, BME280_ADDRESS, subAddress, 1, dest, cnt);
   if (i == 0)
-    dest[0] = 0;
+    return -1;
 }
 
 /**

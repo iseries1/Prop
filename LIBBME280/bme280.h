@@ -4,8 +4,7 @@
  * @author Michael Burmeister
  * @date December 14, 2017
  * @version 1.2
- * @mainpage Custom Libraries
- * <a href="bme280_8h.html">BME280 Digital Humidity, Pressure and Temperature sensor.</a><br>
+ * 
  * @details sample code:
  * 
  * i = BME280_open(BMESCL, BMESDA);<br>

@@ -1,8 +1,9 @@
 libms5607.c
 ms5607.c
 ms5607.h
+ms5607reg.h
 >compiler=C
->memtype=cmm main ram compact
+>memtype=lmm main ram
 >optimize=-Os
 >-m32bit-doubles
 >-fno-exceptions

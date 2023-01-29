@@ -1,8 +1,6 @@
 libnextion.c
 nextion.c
 nextion.h
--I ./../../TextDevices/libfdserial
--L ./../../TextDevices/libfdserial
 >compiler=C
 >memtype=cmm main ram compact
 >optimize=-Os
@@ -11,5 +9,4 @@ nextion.h
 >defs::-std=c99
 >-lm
 >-create_library
->linker::-lfdserial
 >BOARD::ACTIVITYBOARD

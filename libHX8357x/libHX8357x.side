@@ -1,0 +1,13 @@
+libHX8357x.c
+HX8357x.c
+HX8357x.h
+HX8357Regx.h
+>compiler=C
+>memtype=lmm main ram
+>optimize=-Os
+>-m32bit-doubles
+>-fno-exceptions
+>defs::-std=c99
+>-lm
+>-create_library
+>BOARD::ACTIVITYBOARD

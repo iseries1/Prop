@@ -52,30 +52,30 @@ void doRecSBus(void *par)
   int baud;
   int wcnt;
   int c;
+  int bit;
   
   rxmask = 1 << _SBPin;
   baud = 800;
   c = 0;
-  
   while (1)
   {
     waitpne(0, rxmask);       // Wait for Start Bit
     rxbits = 10;
     rxdata = 0;
+    bit = 1;
     wcnt = baud >> 1;
     wcnt = wcnt + CNT;
     while (rxbits > 0)
     {
       wcnt += baud;
       waitcnt2(wcnt, baud);   // Wait for Center of Next bit
-      rxdata = rxdata << 1;
       if ((rxmask & INA) != rxmask)  // Reverse Bit value
-        rxdata = rxdata | 1;
-
+        rxdata = rxdata | bit;
+      bit = bit << 1;
       rxbits--;
     }
-    rxdata = rxdata >> 2;    // Dump Parity and Stop
-    if (rxdata == 0xf0)      // SBus Start Byte Frame value
+    rxdata = rxdata & 0xff;    // Dump Parity and Stop
+    if (rxdata == 0x0f)      // SBus Start Byte Frame value
       c = 0;
     _Dc[c] = rxdata;
     if (c++ > 25)            // Just in case
@@ -91,7 +91,7 @@ void doChannel()
   short c, b, bc;
   
   c = 0;         // Channel
-  b = 0x80;      // Bit Position high -> low
+  b = 1;         // Bit Position high -> low
   bc = 1;        // Bit Channel value
   i = 1;         // Should be 1
   while (lockset(_Lock));
@@ -100,10 +100,10 @@ void doChannel()
   {
     if ((_Dc[i] & b) == b)
       _Cc[c] |= bc;
-    b = b >> 1;
-    if (b == 0)
+    b = b << 1;
+    if (b > 0x80)
     {
-      b = 0x80;
+      b = 1;
       i++;
     }
     bc = bc << 1;

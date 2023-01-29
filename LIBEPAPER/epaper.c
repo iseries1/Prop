@@ -469,13 +469,13 @@ void epaper_drawLine(short x0, short y0, short x1, short y1, char c)
   
 void drawLine(short x, short y, short x1, short y1, char c)
 {
-  short dx, dy, D, x, y, z;
+  short dx, dy, D, xx, yy, z;
   
   dy = y1 - y;
   if (dy < 0)
   {
-    y = y;y = y1;y1 = y;
-    x = x;x = x1;x1 = x;
+    yy = y;yy = y1;y1 = y;
+    xx = x;xx = x1;x1 = x;
   }
   dy = abs(dy);
   dx = x1 - x;
@@ -485,14 +485,14 @@ void drawLine(short x, short y, short x1, short y1, char c)
     z = 1;
   dx = abs(dx);
   D = 2 * dx - dy;
-  x = x;
+  xx = x;
   
-  for (y = y;y <= y1;y++)
+  for (yy = yy;yy <= y1;yy++)
   {
-    epaper_plot(x, y, c);
+    epaper_plot(xx, yy, c);
     if (D > 0)
     {
-      x = x + z;
+      xx = xx + z;
       D = D - 2 * dy;
     }
     D = D + 2 * dx;

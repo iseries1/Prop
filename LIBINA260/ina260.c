@@ -31,12 +31,14 @@ unsigned short INA260_open(char clock, char data)
 
 short INA260_getCurrent(void)
 {
-  int v;
+  short v;
+  int c;
   
   v = _readWord(INA260_CURRENT);
-  v = v * 125;
+
+  c = v * 125 / 100;
   
-  return v/100;
+  return c;
 }
 
 short INA260_getVoltage(void)

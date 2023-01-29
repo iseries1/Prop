@@ -9,12 +9,12 @@
 #include "simpletools.h"
 
 
-#define DIN 7
-#define CLK 6
-#define CS 5
-#define DC 4
-#define RST 3
-#define BUSY 2
+#define DIN 2
+#define CLK 3
+#define CS 4
+#define DC 5
+#define RST 6
+#define BUSY 7
 
 int i;
 
@@ -26,13 +26,12 @@ int main()
   
   epaper_cls(1);
   
-  
   char *x = epaper_buffer();
 
 //  epaper_drawLine(10,10,50,50,0);
-  epaper_writeStr(8, 8, "Hello World");
-//  epaper_writeXStr(8, 8, "Hello");
-//  epaper_writeXStr(64, 8, "World");
+//  epaper_writeStr(8, 8, "Hello World");
+  epaper_writeXStr(8, 8, "Hello");
+  epaper_writeXStr(64, 8, "World");
 //  epaper_writeChar(8, 32, 'A');
 //  epaper_drawLine(120, 32, 100, 64, 0);
   epaper_update();

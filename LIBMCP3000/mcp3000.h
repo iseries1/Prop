@@ -5,8 +5,7 @@
  * @date February 16, 2016
  * @version 1.1
  * @details works with 3000, 3202, 3204 and 3208 chips.
- * @mainpage Custom Libraries
- * <a href="mcp3000_8h.html">MCP3000 Analog to Digital Converter Driver.</a><br>
+ * 
 */
 
 /**

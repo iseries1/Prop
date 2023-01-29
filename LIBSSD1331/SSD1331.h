@@ -4,8 +4,7 @@
  * @author Michael Burmeister
  * @date December 11, 2018
  * @version 1.0
- * @mainpage Custom Libraries
- * <a href="_s_s_d1331_8h.html">SSD1331 Colored OLED Display Driver.</a><br>
+ * 
 */
 
 /* @brief Open connection to Oled Display

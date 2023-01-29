@@ -4,8 +4,7 @@
  * @author Michael Burmeister
  * @date December 13, 2017
  * @version 1.1
- * @mainpage Custom Libraries
- * <a href="_s_bus_8h.html">SBUS Reciever Decoder.</a><br>
+ * 
 */
 
 /**

@@ -33,7 +33,7 @@ fdserial *nxn;
 unsigned char _DataT[OBUFF];
 unsigned char _DataR[IBUFF];
 #ifdef DEBUG
-unsigned char Buffer[2048];
+unsigned char _Buffer[2048];
 int pointer = 0;
 #endif
 struct tm *tt;
@@ -278,8 +278,8 @@ void DoSendRecv(void *par)
     {
       _DataT[_Index] = fdserial_rxChar(nxn);
 #ifdef DEBUG
-      Buffer[pointer++] = _DataT[_Index];
-      Buffer[pointer] = 0;
+      _Buffer[pointer++] = _DataT[_Index];
+      _Buffer[pointer] = 0;
 #endif
       if (_Index++ > IBUFF - 10)
         _Index = IBUFF - 10;
@@ -290,7 +290,7 @@ void DoSendRecv(void *par)
     while (_Head != _Tail)
     {
 #ifdef DEBUG
-      Buffer[pointer++] = _DataR[_Tail];
+      _Buffer[pointer++] = _DataR[_Tail];
 #endif
       fdserial_txChar(nxn, _DataR[_Tail++]);
       _Tail = _Tail & (OBUFF - 1);
@@ -536,15 +536,15 @@ void Nextion_settime(long i)
 void Nextion_debug(void)
 {
 #ifdef DEBUG
-  for (int i=0;i<strlen(Buffer);i++)
+  for (int i=0;i<strlen(_Buffer);i++)
   {
-    if (Buffer[i] == 0xff)
+    if (_Buffer[i] == 0xff)
     {
       putChar('\n');
       i += 2;
     }      
     else
-      putChar(Buffer[i]);
+      putChar(_Buffer[i]);
   }
 #endif
   putChar('\n');

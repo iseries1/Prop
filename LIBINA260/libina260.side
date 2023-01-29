@@ -2,7 +2,7 @@ libina260.c
 ina260.c
 ina260.h
 >compiler=C
->memtype=cmm main ram compact
+>memtype=lmm main ram
 >optimize=-Os
 >-m32bit-doubles
 >-fno-exceptions

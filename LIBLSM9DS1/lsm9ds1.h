@@ -4,8 +4,7 @@
  * @author Michael Burmeister
  * @date August 29, 2017
  * @version 1.0
- * @mainpage Custom Libraries
- * <a href="lsm9ds1_8h.html">LSM9DS1 Parallax IMU Driver.</a><br>
+ * 
  */
 
 #define LSM9DS1Address 0x6a

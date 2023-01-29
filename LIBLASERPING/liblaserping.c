@@ -10,7 +10,7 @@
 #include "laserping.h"
 
 
-#define LASER 16
+#define LASER 18
 #define PING 0
 
 int i;
@@ -18,7 +18,7 @@ int i;
 int main()
 {
 
-  laserping_start('X', LASER);
+  laserping_start('S', LASER);
   
   while(1)
   {

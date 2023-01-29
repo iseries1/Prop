@@ -4,8 +4,7 @@
  * @author Michael Burmeister
  * @date October 13, 2018
  * @version 1.0
- * @mainpage Custom Libraries
- * <a href="settime_8h.html">Set System Time.</a><br>
+ * 
 */
 
 /**

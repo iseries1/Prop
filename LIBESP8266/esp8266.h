@@ -4,8 +4,7 @@
  * @author Michael Burmeister
  * @date April 4, 2019
  * @version 1.1
- * @mainpage Custom Libraries
- * <a href="esp8266_8h.html">ESP8266 Parallax WX WiFi Interface.</a><br>
+ * 
 */
 #include "fdserial.h"
 

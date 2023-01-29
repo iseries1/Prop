@@ -279,6 +279,15 @@ int HX8357_open(char Clk, char MISO, char MOSI, char CS, char DC, char RST, char
   return i;
 }
 
+int HX8357_control(void)
+{
+  int i;
+  
+  i = readCmd(HX8357_RDMADCTL);
+  
+  return i;
+}
+  
 void HX8357_rotation(char rotation)
 {
   char i;

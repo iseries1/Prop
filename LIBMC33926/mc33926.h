@@ -4,8 +4,7 @@
  * @author Michael Burmeister
  * @date June 28, 2019
  * @version 1.0
- * @mainpage Custom Libraries
- * <a href="mc33926_8h.html">MC33926 Dual Motor Driver.</a><br>
+ * 
 */
 
 /**

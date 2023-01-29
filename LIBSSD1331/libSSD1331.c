@@ -8,11 +8,11 @@
 #include "SSD1331.h"
 #include "simpletools.h"
 
-#define OLEDDIN 7
-#define OLEDCLK 6
-#define OLEDCS  5
-#define OLEDDC  4
-#define OLEDRST 3
+#define OLEDDIN 6
+#define OLEDCLK 5
+#define OLEDCS  4
+#define OLEDDC  3
+#define OLEDRST 2
 
 
 int main()

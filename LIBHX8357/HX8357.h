@@ -4,8 +4,7 @@
  * @author Michael Burmeister
  * @date March 11, 2019
  * @version 1.0
- * @mainpage Custom Libraries
- * <a href="_h_x8357_8h.html">HX8357 320X480 display driver.</a><br>
+ * 
 */
 
 // Color definitions
@@ -30,6 +29,12 @@
  * @return open
  */
 int HX8357_open(char Clk, char MISO, char MOSI, char CS, char DC, char RST, char LITE);
+
+/**
+ * @brief get control value
+ * @return value
+ */
+int HX8357_control(void);
 
 /**
  * @brief set rotation

@@ -4,8 +4,7 @@
  * @author Michael Burmeister
  * @date July 7, 2019
  * @version 1.0
- * @mainpage Custom Libraries
- * <a href="epaper_8h.html">WaveShare ePaper Display Driver.</a><br>
+ * 
 */
 
 

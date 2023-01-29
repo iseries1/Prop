@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MS5607 Barometric Pressure Sensor: ms5607.h File Reference</title>
+<title>MS5607 Driver: ms5607.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,8 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">MS5607 Barometric Pressure Sensor
-   &#160;<span id="projectnumber">1.1</span>
+   <div id="projectname">MS5607 Driver
    </div>
   </td>
  </tr>
@@ -63,93 +62,70 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">ms5607.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Read Barometric Pressure Sensor.  
+<p>MS5607 pressure drive.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;simplei2c.h&quot;</code><br />
-</div>
+
 <p><a href="ms5607_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a312d45f1e3a090ecd8efcd630f0c6a6c"><td class="memItemLeft" align="right" valign="top"><a id="a312d45f1e3a090ecd8efcd630f0c6a6c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RSLT_256</b>&#160;&#160;&#160;0x00</td></tr>
+<tr class="separator:a312d45f1e3a090ecd8efcd630f0c6a6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12956ffd3e6475b19d9d3f52937c0454"><td class="memItemLeft" align="right" valign="top"><a id="a12956ffd3e6475b19d9d3f52937c0454"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RSLT_512</b>&#160;&#160;&#160;0x02</td></tr>
+<tr class="separator:a12956ffd3e6475b19d9d3f52937c0454"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cdc6b5f7fe5c43582f4c215abb8a5aa"><td class="memItemLeft" align="right" valign="top"><a id="a0cdc6b5f7fe5c43582f4c215abb8a5aa"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RSLT_1024</b>&#160;&#160;&#160;0x04</td></tr>
+<tr class="separator:a0cdc6b5f7fe5c43582f4c215abb8a5aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4ca22ffbd6e0e9c15f817a8848356ee"><td class="memItemLeft" align="right" valign="top"><a id="aa4ca22ffbd6e0e9c15f817a8848356ee"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RSLT_2048</b>&#160;&#160;&#160;0x06</td></tr>
+<tr class="separator:aa4ca22ffbd6e0e9c15f817a8848356ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3858d2be5ec214e437fd1f58e1131927"><td class="memItemLeft" align="right" valign="top"><a id="a3858d2be5ec214e437fd1f58e1131927"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RSLT_4096</b>&#160;&#160;&#160;0x08</td></tr>
+<tr class="separator:a3858d2be5ec214e437fd1f58e1131927"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2cbd7efd41b4519b07b4b846dc3acf66"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ms5607_8h.html#a2cbd7efd41b4519b07b4b846dc3acf66">ms5607_open</a> (int SCL, int SDA)</td></tr>
-<tr class="memdesc:a2cbd7efd41b4519b07b4b846dc3acf66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open connection to ms5607.  <a href="#a2cbd7efd41b4519b07b4b846dc3acf66">More...</a><br /></td></tr>
-<tr class="separator:a2cbd7efd41b4519b07b4b846dc3acf66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76cf44394064ad1c55e8b38658175a4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ms5607_8h.html#a76cf44394064ad1c55e8b38658175a4a">ms5607_close</a> (void)</td></tr>
-<tr class="memdesc:a76cf44394064ad1c55e8b38658175a4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close connection to ms5607.  <a href="#a76cf44394064ad1c55e8b38658175a4a">More...</a><br /></td></tr>
+<tr class="memitem:a02c6151ac9c4d5084495dd27d1bbe0c9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ms5607_8h.html#a02c6151ac9c4d5084495dd27d1bbe0c9">ms5607_init</a> (int scl, int sda, int osr)</td></tr>
+<tr class="memdesc:a02c6151ac9c4d5084495dd27d1bbe0c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialize MS5607 driver  <a href="#a02c6151ac9c4d5084495dd27d1bbe0c9">More...</a><br /></td></tr>
+<tr class="separator:a02c6151ac9c4d5084495dd27d1bbe0c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76cf44394064ad1c55e8b38658175a4a"><td class="memItemLeft" align="right" valign="top"><a id="a76cf44394064ad1c55e8b38658175a4a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ms5607_8h.html#a76cf44394064ad1c55e8b38658175a4a">ms5607_close</a> (void)</td></tr>
+<tr class="memdesc:a76cf44394064ad1c55e8b38658175a4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">disconnect driver <br /></td></tr>
 <tr class="separator:a76cf44394064ad1c55e8b38658175a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe1ac52ac7f4cc9acb632424729c0399"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ms5607_8h.html#abe1ac52ac7f4cc9acb632424729c0399">ms5607_celsius</a> (void)</td></tr>
-<tr class="memdesc:abe1ac52ac7f4cc9acb632424729c0399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current tempreture in celsius.  <a href="#abe1ac52ac7f4cc9acb632424729c0399">More...</a><br /></td></tr>
-<tr class="separator:abe1ac52ac7f4cc9acb632424729c0399"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b98036517f3f624bb6848889764fe09"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ms5607_8h.html#a0b98036517f3f624bb6848889764fe09">ms5607_rawtemperature</a> (void)</td></tr>
+<tr class="memdesc:a0b98036517f3f624bb6848889764fe09"><td class="mdescLeft">&#160;</td><td class="mdescRight">get raw temperature  <a href="#a0b98036517f3f624bb6848889764fe09">More...</a><br /></td></tr>
+<tr class="separator:a0b98036517f3f624bb6848889764fe09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f213d730a26aaf119e73ce81f93377e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ms5607_8h.html#a3f213d730a26aaf119e73ce81f93377e">ms5607_rawpressure</a> (void)</td></tr>
+<tr class="memdesc:a3f213d730a26aaf119e73ce81f93377e"><td class="mdescLeft">&#160;</td><td class="mdescRight">get raw air pressure in millibars  <a href="#a3f213d730a26aaf119e73ce81f93377e">More...</a><br /></td></tr>
+<tr class="separator:a3f213d730a26aaf119e73ce81f93377e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22e9fa334f4430f0613ce230cb737408"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ms5607_8h.html#a22e9fa334f4430f0613ce230cb737408">ms5607_temperature</a> (void)</td></tr>
+<tr class="memdesc:a22e9fa334f4430f0613ce230cb737408"><td class="mdescLeft">&#160;</td><td class="mdescRight">get temperature in celcius  <a href="#a22e9fa334f4430f0613ce230cb737408">More...</a><br /></td></tr>
+<tr class="separator:a22e9fa334f4430f0613ce230cb737408"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af82362b57c4eba52c1131ed27758e2cb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ms5607_8h.html#af82362b57c4eba52c1131ed27758e2cb">ms5607_fahrenheit</a> (void)</td></tr>
-<tr class="memdesc:af82362b57c4eba52c1131ed27758e2cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current tempreture in fahrenheit.  <a href="#af82362b57c4eba52c1131ed27758e2cb">More...</a><br /></td></tr>
+<tr class="memdesc:af82362b57c4eba52c1131ed27758e2cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">get temperature in fahrenheit  <a href="#af82362b57c4eba52c1131ed27758e2cb">More...</a><br /></td></tr>
 <tr class="separator:af82362b57c4eba52c1131ed27758e2cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33c5e8cf8a848be2d94c4107a50c723e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ms5607_8h.html#a33c5e8cf8a848be2d94c4107a50c723e">ms5607_pressure</a> (void)</td></tr>
-<tr class="memdesc:a33c5e8cf8a848be2d94c4107a50c723e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current pressure in millibars.  <a href="#a33c5e8cf8a848be2d94c4107a50c723e">More...</a><br /></td></tr>
+<tr class="memdesc:a33c5e8cf8a848be2d94c4107a50c723e"><td class="mdescLeft">&#160;</td><td class="mdescRight">get pressure in millibars  <a href="#a33c5e8cf8a848be2d94c4107a50c723e">More...</a><br /></td></tr>
 <tr class="separator:a33c5e8cf8a848be2d94c4107a50c723e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a347ce0bd887ebde71cd91287dd56437f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ms5607_8h.html#a347ce0bd887ebde71cd91287dd56437f">ms5607_mercury</a> (void)</td></tr>
-<tr class="memdesc:a347ce0bd887ebde71cd91287dd56437f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current pressure in hundredths of an Inch of Mercury.  <a href="#a347ce0bd887ebde71cd91287dd56437f">More...</a><br /></td></tr>
+<tr class="memdesc:a347ce0bd887ebde71cd91287dd56437f"><td class="mdescLeft">&#160;</td><td class="mdescRight">get pressure in millimeters of mercury  <a href="#a347ce0bd887ebde71cd91287dd56437f">More...</a><br /></td></tr>
 <tr class="separator:a347ce0bd887ebde71cd91287dd56437f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cb7429093d47e0ed50af34cbd9974e6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ms5607_8h.html#a4cb7429093d47e0ed50af34cbd9974e6">ms5607_rawtemp</a> (void)</td></tr>
-<tr class="memdesc:a4cb7429093d47e0ed50af34cbd9974e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get raw temperature.  <a href="#a4cb7429093d47e0ed50af34cbd9974e6">More...</a><br /></td></tr>
-<tr class="separator:a4cb7429093d47e0ed50af34cbd9974e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f213d730a26aaf119e73ce81f93377e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ms5607_8h.html#a3f213d730a26aaf119e73ce81f93377e">ms5607_rawpressure</a> (void)</td></tr>
-<tr class="memdesc:a3f213d730a26aaf119e73ce81f93377e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get raw pressure.  <a href="#a3f213d730a26aaf119e73ce81f93377e">More...</a><br /></td></tr>
-<tr class="separator:a3f213d730a26aaf119e73ce81f93377e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Read Barometric Pressure Sensor. </p>
+<div class="textblock"><p>MS5607 pressure drive. </p>
 <dl class="section author"><dt>Author</dt><dd>Michael Burmeister </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>January 25, 2016 </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>1.1 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>May 24, 2020 </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="abe1ac52ac7f4cc9acb632424729c0399"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe1ac52ac7f4cc9acb632424729c0399">&#9670;&nbsp;</a></span>ms5607_celsius()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ms5607_celsius </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get current tempreture in celsius. </p>
-<dl class="section return"><dt>Returns</dt><dd>Celsius </dd></dl>
-
-</div>
-</div>
-<a id="a76cf44394064ad1c55e8b38658175a4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76cf44394064ad1c55e8b38658175a4a">&#9670;&nbsp;</a></span>ms5607_close()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ms5607_close </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Close connection to ms5607. </p>
-<dl class="section return"><dt>Returns</dt><dd>Nothing </dd></dl>
-
-</div>
-</div>
 <a id="af82362b57c4eba52c1131ed27758e2cb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af82362b57c4eba52c1131ed27758e2cb">&#9670;&nbsp;</a></span>ms5607_fahrenheit()</h2>
 
@@ -166,8 +142,53 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get current tempreture in fahrenheit. </p>
-<dl class="section return"><dt>Returns</dt><dd>Fahrenheit </dd></dl>
+<p>get temperature in fahrenheit </p>
+<dl class="section return"><dt>Returns</dt><dd>temperature * 100 </dd></dl>
+
+</div>
+</div>
+<a id="a02c6151ac9c4d5084495dd27d1bbe0c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02c6151ac9c4d5084495dd27d1bbe0c9">&#9670;&nbsp;</a></span>ms5607_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ms5607_init </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>scl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>osr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>initialize MS5607 driver </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">scl</td><td>clock pin </td></tr>
+    <tr><td class="paramname">sda</td><td>data pin </td></tr>
+    <tr><td class="paramname">osr</td><td>over sample rate value (RSLT_256, RSLT_512, RSLT_1024, RSLT_2048, RSLT_4096) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 check sum or zero if not found </dd></dl>
 
 </div>
 </div>
@@ -187,46 +208,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get current pressure in hundredths of an Inch of Mercury. </p>
-<dl class="section return"><dt>Returns</dt><dd>Millibars </dd></dl>
-
-</div>
-</div>
-<a id="a2cbd7efd41b4519b07b4b846dc3acf66"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cbd7efd41b4519b07b4b846dc3acf66">&#9670;&nbsp;</a></span>ms5607_open()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ms5607_open </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>SCL</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>SDA</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Open connection to ms5607. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">SCL</td><td>i2c Clock Pin </td></tr>
-    <tr><td class="paramname">SDA</td><td>i2c Data Pin </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Cog number of compass connection </dd></dl>
+<p>get pressure in millimeters of mercury </p>
+<dl class="section return"><dt>Returns</dt><dd>mercury </dd></dl>
 
 </div>
 </div>
@@ -246,8 +229,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get current pressure in millibars. </p>
-<dl class="section return"><dt>Returns</dt><dd>Millibars </dd></dl>
+<p>get pressure in millibars </p>
+<dl class="section return"><dt>Returns</dt><dd>pressure </dd></dl>
 
 </div>
 </div>
@@ -267,19 +250,19 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get raw pressure. </p>
-<dl class="section return"><dt>Returns</dt><dd>Pressure </dd></dl>
+<p>get raw air pressure in millibars </p>
+<dl class="section return"><dt>Returns</dt><dd>pressure </dd></dl>
 
 </div>
 </div>
-<a id="a4cb7429093d47e0ed50af34cbd9974e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cb7429093d47e0ed50af34cbd9974e6">&#9670;&nbsp;</a></span>ms5607_rawtemp()</h2>
+<a id="a0b98036517f3f624bb6848889764fe09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b98036517f3f624bb6848889764fe09">&#9670;&nbsp;</a></span>ms5607_rawtemperature()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int ms5607_rawtemp </td>
+          <td class="memname">int ms5607_rawtemperature </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -288,8 +271,29 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get raw temperature. </p>
-<dl class="section return"><dt>Returns</dt><dd>Temp </dd></dl>
+<p>get raw temperature </p>
+<dl class="section return"><dt>Returns</dt><dd>temperature </dd></dl>
+
+</div>
+</div>
+<a id="a22e9fa334f4430f0613ce230cb737408"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22e9fa334f4430f0613ce230cb737408">&#9670;&nbsp;</a></span>ms5607_temperature()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ms5607_temperature </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get temperature in celcius </p>
+<dl class="section return"><dt>Returns</dt><dd>temperature * 100 </dd></dl>
 
 </div>
 </div>

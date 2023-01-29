@@ -4,8 +4,7 @@
  * @author Michael Burmeister
  * @date March 14, 2019
  * @version 1.0
- * @mainpage Custom Libraries
- * <a href="_stepper_8h.html">A4988 Stepper Motor Driver.</a><br>
+ * 
 */
 
 /**
