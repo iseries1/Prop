@@ -20,9 +20,9 @@ char Buffer[5100];
 fdserial *fd;
 char url[] = "api.openweathermap.org";
 // id=<your city code>&APPID=<your application ID>
-char rqs2[] = "GET /data/2.5/forecast?id=5274867&APPID=1634be5a0a54949cb0590aa45115caa4&units=imperial";
-char rqs[] = "GET /data/2.5/weather?id=5274867&APPID=1634be5a0a54949cb0590aa45115caa4&units=imperial";
-char rqs3[] = "GET /data/2.5/onecall?lat=44.84&lon=-87.37&exclude=minutely,daily,alert&APPID=1634be5a0a54949cb0590aa45115caa4&units=imperial";
+char rqs2[] = "GET /data/2.5/forecast?id=<Your ID>&units=imperial";
+char rqs[] = "GET /data/2.5/weather?id=<Your ID>&units=imperial";
+char rqs3[] = "GET /data/2.5/onecall?lat=44.84&lon=-87.37&exclude=minutely,daily,alert&APPID=<What?>&units=imperial";
 
 int main()
 {
