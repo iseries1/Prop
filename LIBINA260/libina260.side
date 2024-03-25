@@ -1,6 +1,7 @@
 libina260.c
 ina260.c
 ina260.h
+ina260_reg.h
 >compiler=C
 >memtype=lmm main ram
 >optimize=-Os

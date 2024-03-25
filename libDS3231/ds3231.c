@@ -186,7 +186,7 @@ int DS3231_SetTime(int hour, int minutes, int seconds)
     return i;
 }
 
-void DS3231_SetDateTime()
+int DS3231_SetDateTime()
 {
     struct timeval tv;
     int i;
@@ -202,6 +202,7 @@ void DS3231_SetDateTime()
     tv.tv_usec = 0;
     tv.tv_sec = i;
     settimeofday(&tv, 0);
+    return i;
 }
 
 int DS3231_Temperature()
@@ -240,30 +241,22 @@ int DS3231_DECIMAL(int value)
 int DS3231_Read(int reg)
 {
     int i;
+    char data[4];
     
-    i = i2c_poll(pbus, DS3231_ADDRESS);
-    if (i != 0)
-    	return -1;
-    i = i2c_writeByte(pbus, reg);
-    i = i2c_poll(pbus, DS3231_ADDRESS | 1);
-    i = i2c_readByte(pbus, 1);
-    i2c_stop(pbus);
+    i = i2c_in(pbus, DS3231_ADDRESS, reg, 1, data, 1);
+    i = data[0];
+    
     return i;
 }
 
 int DS3231_Write(int reg, int value)
 {
     int i;
+    char data[4];
     
-    i = 0;
-    i = i2c_poll(pbus, DS3231_ADDRESS);
-    if (i != 0)
-    	return -1;
-    i = i2c_writeByte(pbus, reg);
-    if (i != 0)
-    	return -1;
-    i = i2c_writeByte(pbus, value);
-    i2c_stop(pbus);
+    data[0] = value;
+    i = i2c_out(pbus, DS3231_ADDRESS, reg, 1, data, 1);
+    
     return i;
 }
 

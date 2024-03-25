@@ -1,0 +1,13 @@
+libicm20948.c
+icm20948.c
+icm20948.h
+icm20948_reg.h
+>compiler=C
+>memtype=cmm main ram compact
+>optimize=-Os
+>-m32bit-doubles
+>-fno-exceptions
+>defs::-std=c99
+>-lm
+>-create_library
+>BOARD::ACTIVITYBOARD

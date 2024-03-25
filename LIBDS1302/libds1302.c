@@ -11,10 +11,10 @@
 #include "time.h"
 #include <stdlib.h>
 
-#define MISO 8
-#define MOSI 9
-#define SCLK 10
-#define CS   11
+#define MISO 15
+#define MOSI 14
+#define SCLK 13
+#define CS   12
 
 time_t tm;
 int m, s, d, mn, hr, yr, dw;

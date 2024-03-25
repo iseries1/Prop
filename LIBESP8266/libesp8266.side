@@ -2,7 +2,7 @@ libesp8266.c
 esp8266.c
 esp8266.h
 >compiler=C
->memtype=cmm main ram compact
+>memtype=lmm main ram
 >optimize=-Os
 >-m32bit-doubles
 >-fno-exceptions

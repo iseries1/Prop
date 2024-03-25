@@ -3,7 +3,7 @@ ds3231.h
 ds3231.c
 ds3231reg.h
 >compiler=C
->memtype=cmm main ram compact
+>memtype=lmm main ram
 >optimize=-Os
 >-m32bit-doubles
 >-fno-exceptions

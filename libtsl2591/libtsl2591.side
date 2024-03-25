@@ -1,0 +1,13 @@
+libtsl2591.c
+tsl2591.c
+tsl2591.h
+tsl2591_reg.h
+>compiler=C
+>memtype=cmm main ram compact
+>optimize=-Os
+>-m32bit-doubles
+>-fno-exceptions
+>defs::-std=c99
+>-lm
+>-create_library
+>BOARD::ACTIVITYBOARD

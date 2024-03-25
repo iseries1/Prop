@@ -2,7 +2,7 @@
  * @brief Connect to Parallax WX board
  * @author Michael Burmeister
  * @date April 4, 2019
- * @version 1.1
+ * @version 1.2
  * 
 */
 
@@ -38,6 +38,7 @@ fdserial *_esp;
 char _Buffer[1050];
 char _Work[16];
 char _URL[64];
+char *_Header = NULL;
 char _Status;
 int _SValue;
 unsigned long _PCNTX;
@@ -93,12 +94,22 @@ int esp8266_http(char handle, char *request, short opt)
     strcat(_Buffer, "close");
   else
     strcat(_Buffer, "keep-alive");
+  if (_Header != NULL)
+  {
+    strcat(_Buffer, "\r\n");
+    strcat(_Buffer, _Header);
+  }
   strcat(_Buffer, "\r\nAccept: */\*\r\n\r\n");
 
   i = strlen(_Buffer);
   
   return esp8266_sendbin(handle, _Buffer, i);
 }
+
+void esp8266_setHeader(char *header)
+{
+  _Header = header;
+}  
 
 int esp8266_sendbin(char handle, unsigned char *data, short size)
 {
@@ -213,18 +224,18 @@ char *esp8266_check(char *env)
   return NULL;
 }
 
-int esp8266_poll(int mask)
+char esp8266_poll(int mask)
 {
   int i;
 
+  if (mask == 0)
+    mask = -1;
   dprinti(_esp, "%c%c%d\r", CMD, POLL, mask);
   i = doWait();
   if (i == 0)
     return i;
   
-  i = atoi(&_Buffer[6]);
-
-  return i;
+  return _Status;
 }
 
 int esp8266_listen(char protocol, char *uri)
@@ -265,6 +276,13 @@ int esp8266_reply(char handle, char *data)
     return _SValue;
 
   return -_SValue;
+}
+
+int esp8266_wait(char *type)
+{
+ while (doWait() <= 0);
+ *type = _Status;
+ return _SValue;   
 }
 
 char* esp8266_path(char handle)

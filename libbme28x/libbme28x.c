@@ -19,8 +19,8 @@ BME280_INTF_RET_TYPE bme280Write(uint8_t, uint8_t *, uint16_t, void *);
 void bme280Wait(uint32_t, void *);
 
 
-#define BMESCL 1
-#define BMESDA 0
+#define BMESCL 7
+#define BMESDA 6
 
 static i2c *bme;
 
@@ -109,7 +109,7 @@ void print_sensor_data(struct bme280_data *comp_data)
 #ifdef BME280_FLOAT_ENABLE
         printf("%0.2f, %0.2f, %0.2f\r\n",comp_data->temperature * 9/5+3200, comp_data->pressure, comp_data->humidity);
 #else
-        printf("%ld, %ld, %ld\r\n",comp_data->temperature * 9/5+3200, comp_data->pressure, comp_data->humidity);
+        printf("%ld, %ld, %ld\r\n",comp_data->temperature, comp_data->pressure/34, comp_data->humidity);
 #endif
 }
 
@@ -174,5 +174,5 @@ BME280_INTF_RET_TYPE bme280Write(uint8_t reg_addr, uint8_t *data, uint16_t len, 
 
 void bme280Wait(uint32_t period, void *dev_id)
 {
-    pause(period);
+    usleep(period);
 }

@@ -109,10 +109,16 @@ int main()
   x = json_find("list.main.temp");
   print(x);
   print("\n");
-      
+  
+  json_init(data);
+  json_putStr("req", "data");
+  json_putDec("value", "10.5");
+  
+  print(data);
+  
   while(1)
   {
-    // Add main loop code here.
+    pause(500);
     
   }  
 }

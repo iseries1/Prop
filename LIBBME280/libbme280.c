@@ -12,8 +12,8 @@
 void doReset(void);
 
 
-#define BMESCL 1
-#define BMESDA 0
+#define BMESCL 7
+#define BMESDA 6
 
 
 int main()
@@ -63,7 +63,7 @@ int main()
 //    printf("Temp: %d %2.2f ", i, f);
     print("Temp: %d ", i);
     
-    i = BME280_getPressure();
+    i = BME280_getPressure()/34;
 //    f = BME280_getPressuref();
 //    printf("Pressure: %d %2.2f ", i, f);
     print("Pressure: %d ", i);

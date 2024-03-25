@@ -3,7 +3,7 @@
  * @brief Connect to Parallax WX board
  * @author Michael Burmeister
  * @date April 4, 2019
- * @version 1.1
+ * @version 1.2
  * 
 */
 #include "fdserial.h"
@@ -42,6 +42,12 @@ int esp8266_send(char handle, char *request);
  * @return status
  */
 int esp8266_http(char handle, char *request, short opt);
+
+/**
+ * @brief set header for http requests
+ * @param header pointer to add
+ */
+void esp8266_setHeader(char *header);
 
 /**
  * @brief send binary data
@@ -106,10 +112,10 @@ char *esp8266_check(char *env);
 
 /**
  * @brief poll connection status
- * @param mask of handles to check
- * @return status
+ * @param mask of handles to check 0 = all
+ * @return request type (G, P, W, D, S, X, N, E)
  */
-int esp8266_poll(int mask);
+char esp8266_poll(int mask);
 
 /**
  * @brief set listen uri
@@ -125,6 +131,13 @@ int esp8266_listen(char protocal, char *uri);
  * @return status
  */
 int esp8266_reply(char handle, char *data);
+
+/**
+ * @brief wait for incomding connection
+ * @param type character pointer to return type
+ * @return handle
+ */
+int esp8266_wait(char *type);
 
 /**
  * @brief get path data from handle

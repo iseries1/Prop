@@ -130,7 +130,7 @@ int DS3231_SetTime(int hour, int minutes, int seconds);
  * @brief Set System date and time
  * set date time for c functions
  */
-void DS3231_SetDateTime(void);
+int DS3231_SetDateTime(void);
 
 /**
  * @brief Read Temperature

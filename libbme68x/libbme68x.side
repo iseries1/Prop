@@ -1,0 +1,13 @@
+libbme68x.c
+bme68x.h
+bme68x.c
+bme68x_defs.h
+>compiler=C
+>memtype=cmm main ram compact
+>optimize=-Os
+>-m32bit-doubles
+>-fno-exceptions
+>defs::-std=c99
+>-lm
+>-create_library
+>BOARD::ACTIVITYBOARD
